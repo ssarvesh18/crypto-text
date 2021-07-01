@@ -5,6 +5,12 @@ const morgan = require('morgan');
 const cors = require('cors');
 const socket = require('socket.io');
 
+const proxy = require('http-proxy-middleware')
+
+module.exports = function(app) {
+    app.use(proxy(['/api' ], { target: 'http://localhost:5000' }));
+} 
+
 app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
@@ -26,8 +32,8 @@ app.use(require('./routes/routes'));
 
 const port = process.env.PORT||5000;
 
-if(process.env.NODE_ENV=="production"){
-    app.use(express.static("project/build"));
+if(process.env.NODE_ENV==='production' ||  process.env.NODE_ENV == 'staging'){
+    app.use(express.static(__dirname+'project/build'));
     const path = require("path");
     app.get("*", (req, res) => { 
         res.sendFile(path.resolve(__dirname,'project','build','index.html'));
