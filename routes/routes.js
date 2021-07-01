@@ -7,10 +7,6 @@ const fetchController = require('./fetchController');
 const {catchErrors} = require('./errorhandlers');
 const { authorize, authorize2 } = require('./authorization');
 
-router.get('/',(req,res)=>{
-    res.send('home route');
-})
-
 router.post('/login',catchErrors(userController.login));
 router.post('/register',catchErrors(userController.register));
 
