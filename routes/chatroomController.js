@@ -13,7 +13,7 @@ const createChatroom = async (req,res)=>{
         })
         await conversation.save();
         res.json({
-            message : `${group_name} chatroom created `
+            message : `${group_name} chatroom created,please refresh the page`
         })
     }catch(err)
     {
@@ -26,7 +26,7 @@ const createChatroom = async (req,res)=>{
 const addtoChatroom = async (req,res)=>{
     const group = await chatroom.updateOne({ _id: req.body.group_id},{ $addToSet: { users: req.body.username } });
     res.json({
-        message: `${req.body.username} added to group`,
+        message: `${req.body.username} added to group,please refresh the page`,
         group
     });
 }
