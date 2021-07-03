@@ -24,11 +24,18 @@ const createChatroom = async (req,res)=>{
 }
  
 const addtoChatroom = async (req,res)=>{
-    const group = await chatroom.updateOne({ _id: req.body.group_id},{ $addToSet: { users: req.body.username } });
-    res.json({
-        message: `${req.body.username} added to group,please refresh the page`,
-        group
-    });
+    const userexists = await user.findOne({username : req.body.username});
+    if(userexists){
+        const group = await chatroom.updateOne({ _id: req.body.group_id},{ $addToSet: { users: req.body.username } });
+        res.json({
+            message: `${req.body.username} added to group,please refresh the page`,
+            group
+        });
+    }else{
+        res.status(400).json({
+            message: `${req.body.username} does not exist.`
+        })
+    }
 }
 const makeAdmin = async (req,res)=>{
     const group = await chatroom.updateOne({ _id: req.body.group_id},{ $addToSet: { users:req.body.username , admins:req.body.username } });

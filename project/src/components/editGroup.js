@@ -59,7 +59,7 @@ const Editgroup = (props)=>{
                 'Authorization': `Bearer ${localStorage.getItem("token")}` 
             }}).then((response)=>{
                 setChangeddata(!changeddata);
-                // toastSuccess(response.data.message);
+                toastSuccess(response.data.message);
             }).catch((err)=>{
                 toastSuccess(err.response.data.message);
             })
