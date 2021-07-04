@@ -1,1 +1,1 @@
-[crypto-text.github.io](https://crypt0-text.herokuapp.com)
+[crypto-text](https://crypt0-text.herokuapp.com)
