@@ -1,3 +1,3 @@
 # crypto-text.github.io
-My first MERN stack project
+My first full stack project
 Impemented using : MERN, socket.io , cryptojs.
